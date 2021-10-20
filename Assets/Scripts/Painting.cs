@@ -100,6 +100,7 @@ public class Painting : MonoBehaviour
                     playerUI.UpdateScoreText(score);
 
                     TagManager.Si().tags[GetComponent<PlayerController>().NumeroPlayer] = tag;
+                    TagManager.Si().peintures[GetComponent<PlayerController>().NumeroPlayer] = peinture;
 
                     if (scoringSFX != null)
                     {

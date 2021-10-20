@@ -11,6 +11,7 @@ public class PipeManager : MySingleton<PipeManager>
     public int maxNumberChunk = 3;
     public GameObject[] tagPrefab;
     public GameObject[] obstaclePrefab;
+    public GameObject[] powerUpPrefab;
 
     [SerializeField]
     private float distanceParcouru = 0f;
@@ -25,7 +26,9 @@ public class PipeManager : MySingleton<PipeManager>
     public int[] timeDifficulty = new int[7] { 25, 40, 60, 75, 105, 120, 150};
     public Vector3[] sliceNumbers = new Vector3[7] { new Vector3(1, 1, 5), new Vector3(1, 2, 5), new Vector3(3, 2, 4), new Vector3(3, 3, 4), new Vector3(4, 3, 3), new Vector3(5, 4, 3), new Vector3(5, 5, 2) };
 
-    private int difficultyIndex = 0;  
+    private int difficultyIndex = 0;
+
+    private int maxPowerUp = 1;
 
     private void Awake()
     {
@@ -46,6 +49,8 @@ public class PipeManager : MySingleton<PipeManager>
                 GameObject chunk = chunksPipe[0];
                 List<GameObject> tags = chunk.GetComponent<Pipe>().listTag;
                 List< GameObject> obstacles = chunk.GetComponent<Pipe>().obstacle;
+                List<GameObject> powerUps = chunk.GetComponent<Pipe>().powerUp;
+                
                 foreach (GameObject obj in tags)
                 {
                     Destroy(obj);
@@ -56,8 +61,14 @@ public class PipeManager : MySingleton<PipeManager>
                     Destroy(obj);
                 }
 
+                foreach (GameObject obj in powerUps)
+                {
+                    Destroy(obj);
+                }
+
                 tags.Clear();
                 obstacles.Clear();
+                powerUps.Clear();
 
                 chunksPipe.RemoveAt(0);
                 newChunk = chunk;
@@ -82,13 +93,9 @@ public class PipeManager : MySingleton<PipeManager>
     void UpdateDifficulty()
     {
         difficulty += Time.deltaTime;
-        if( difficulty > timeDifficulty[difficultyIndex])
+        if (difficultyIndex < timeDifficulty.Count() && difficulty > timeDifficulty[difficultyIndex])
         {
-            if (difficultyIndex < timeDifficulty.Count() - 1)
-            {
-                difficultyIndex++;
-            }
-
+            difficultyIndex++;
         }
     }
 
@@ -137,12 +144,17 @@ public class PipeManager : MySingleton<PipeManager>
     void CreateObstacle(Vector3 startPoint, Pipe pipe)
     {
         //int verticalSlice = Random.Range(0, numberVerticalSlice);
-        List<int> horizontalDirection = GetNumbersFromList(0, numberHorizontalSlice, (int)sliceNumbers[difficultyIndex].x);
+
+        List<int> rangeHorizontal = CreateNumberList(0, numberHorizontalSlice);
+        List<int> horizontalDirection = GetNumbersFromList(ref rangeHorizontal, (int)sliceNumbers[difficultyIndex].x);
+
+        int spawnedPowerUp = 0;
 
         foreach(int horizontalSlice in horizontalDirection)
         {
-            Debug.Log(horizontalSlice);
-            List<int> verticalDirection = GetNumbersFromList(0, numberVerticalSlice, (int)sliceNumbers[difficultyIndex].y);
+            List<int> rangeVertical = CreateNumberList(0, numberVerticalSlice);
+            List<int> verticalDirection = GetNumbersFromList(ref rangeVertical, (int)sliceNumbers[difficultyIndex].y);
+
             foreach (int verticalSlice in verticalDirection)
             {
                 float angle = (360 / numberVerticalSlice * verticalSlice);
@@ -161,34 +173,49 @@ public class PipeManager : MySingleton<PipeManager>
                 pipe.obstacle.Add(obstacle);
 
             }
+
+            if (spawnedPowerUp < maxPowerUp && rangeVertical.Count > 0)
+            {
+                if ((int)Random.Range(0, 7) == 0)
+                {
+                    float angle = (360 / numberVerticalSlice * GetRandomfromList(ref rangeVertical));
+                    Vector3 dir = Quaternion.AngleAxis(angle, Vector3.forward) * Vector3.right;
+
+                    GameObject powerUp = Instantiate(powerUpPrefab[(int)Random.Range(0, powerUpPrefab.Length)], startPoint + new Vector3(0, 0, (pipeLength / numberHorizontalSlice) * horizontalSlice) + dir * 6, Quaternion.AngleAxis(angle + 90, Vector3.forward));
+                    pipe.powerUp.Add(powerUp);
+                    spawnedPowerUp++;
+                }
+
+            }
+
         }
     }
 
-    private List<int> GetNumbersFromList(int minInclusive, int maxExclusive, int numberToChoose)
+    private List<int> CreateNumberList(int minInclusive, int maxExclusive)
     {
-
-        if(maxExclusive - minInclusive + 1< numberToChoose)
+        /*if (maxExclusive - minInclusive + 1 < numberToChoose)
         {
             Debug.Log("Error : Not Enough Range");
             return null;
-        }
+        }*/
 
         List<int> range = new List<int>();
-        for(int i = minInclusive; i< maxExclusive; i++)
+        for (int i = minInclusive; i < maxExclusive; i++)
         {
             range.Add(i);
         }
 
-        List<int> randomNumbers = new List<int>();
-        
+        return range;
+    }
+
+    private List<int> GetNumbersFromList(ref List<int> range, int numberToChoose)
+    {
+        List<int> randomNumbers = new List<int>();        
 
         for(int i = 0; i<numberToChoose; i++)
         {
             randomNumbers.Add(GetRandomfromList(ref range));
         }
-
-
-
 
         return randomNumbers;
     }

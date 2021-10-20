@@ -47,7 +47,7 @@ public class VariableGlobale : MySingleton<VariableGlobale>
     void Start()
     {
         colorsPlayer = new Color[2];
-        rainbowColor = Color.HSVToRGB(hue, sat, bri) * 20;
+        rainbowColor = Color.HSVToRGB(hue, sat, bri) * 30;
     }
 
     void Update()

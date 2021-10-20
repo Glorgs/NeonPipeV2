@@ -53,19 +53,19 @@ public class PlayerManager : MonoBehaviour
         }
         else
         {
-            StartCoroutine(Invulnerability());
+            StartInvulnerability(invulnerabilityTime);
         }
     }
 
-    IEnumerator Invulnerability()
+    private IEnumerator Invulnerability(float duration = 1.0f)
     {
         float t = 0;
         int blink = 0;
 
-        //playerBody.isKinematic = true;
+        playerBody.detectCollisions = false;
         playerRenderer.enabled = false;
 
-        while(t < invulnerabilityTime)
+        while (t < duration)
         {
             blink++;
             if(blink > blinkFrame)
@@ -77,8 +77,13 @@ public class PlayerManager : MonoBehaviour
             yield return null;
         }
 
-        //playerBody.isKinematic = false;
+        playerBody.detectCollisions = true;
         playerRenderer.enabled = true;
+    }
+
+    public void StartInvulnerability(float time)
+    {
+        StartCoroutine(Invulnerability(time));
     }
 
 
