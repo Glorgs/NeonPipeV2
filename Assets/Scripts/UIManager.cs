@@ -30,6 +30,7 @@ public class UIManager : MySingleton<UIManager>
     public void StartGameSolo() {
         VariableGlobale.Si().NumberPlayer = 0;
         VariableGlobale.Si().MaxAmountPlayer = 1;
+        VariableGlobale.Si().CurrentHP = VariableGlobale.Si().MaxHP;
 
         AudioManager.Si().Stop("Music");
         AudioManager.Si().Play("MusicPlay", AudioManager.Si().gameObject);
@@ -40,6 +41,7 @@ public class UIManager : MySingleton<UIManager>
     {
         VariableGlobale.Si().NumberPlayer = 0;
         VariableGlobale.Si().MaxAmountPlayer = 2;
+        VariableGlobale.Si().CurrentHP = VariableGlobale.Si().MaxHP;
 
         AudioManager.Si().Stop("Music");
         AudioManager.Si().Play("MusicPlay", AudioManager.Si().gameObject);
@@ -68,10 +70,15 @@ public class UIManager : MySingleton<UIManager>
     }
 
     public void RestartGame() {
-        VariableGlobale.Si().NumberPlayer = 0;
-
-        SceneManager.LoadScene(1);
         Time.timeScale = 1f;
+        if(VariableGlobale.Si().MaxAmountPlayer == 1)
+        {
+            StartGameSolo();
+        }
+        else
+        {
+            StartGameCoop();
+        }
     }
 
     public void GoToMenu() {

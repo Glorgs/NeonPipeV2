@@ -6,7 +6,7 @@ using TMPro;
 
 public class InGamePlayerUI : MonoBehaviour
 {
-    [SerializeField] private GameObject LifeBar;
+    [SerializeField] private Slider LifeBar;
     [SerializeField] private TextMeshProUGUI scoreText;
     
     [SerializeField] private RawImage[] hearts;
@@ -20,7 +20,7 @@ public class InGamePlayerUI : MonoBehaviour
         float screenWidth = Screen.width;
         float screenHeight = Screen.height;
 
-        scoreRenderer = scoreText.gameObject.GetComponent<CanvasRenderer>();
+        //scoreRenderer = scoreText.gameObject.GetComponent<CanvasRenderer>();
     }
 
     public void UpdateScoreText(int currentScore) {
@@ -41,5 +41,10 @@ public class InGamePlayerUI : MonoBehaviour
                 hearts[i].enabled = false;
             }
         }
+    }
+
+    public void UpdateLifeBar()
+    {
+        LifeBar.value = ((float)VariableGlobale.Si().CurrentHP / VariableGlobale.Si().MaxHP);
     }
 }

@@ -20,6 +20,33 @@ public class VariableGlobale : MySingleton<VariableGlobale>
 
     public GameObject prefabPaintPlayer1;
 
+    public int maxHP = 100;
+    private int currentHP;
+
+    public int MaxHP
+    {
+        get
+        {
+            return maxHP;
+        }
+        set
+        {
+            maxHP = value;
+        }
+    }
+
+    public int CurrentHP
+    {
+        get
+        {
+            return currentHP;
+        }
+        set
+        {
+            currentHP = value;
+        }
+    }
+    
     public int MaxAmountPlayer
     {
         get
@@ -46,6 +73,7 @@ public class VariableGlobale : MySingleton<VariableGlobale>
 
     void Start()
     {
+        currentHP = maxHP;
         colorsPlayer = new Color[2];
         rainbowColor = Color.HSVToRGB(hue, sat, bri) * 30;
     }
@@ -65,6 +93,15 @@ public class VariableGlobale : MySingleton<VariableGlobale>
     public void SetColor(Color c, float intensity, int numPlayer)
     {
         colorsPlayer[numPlayer] = c * intensity;
+    }
+
+    public void Heal(int amount)
+    {
+        currentHP += amount;
+        if (currentHP > maxHP)
+        {
+            currentHP = maxHP;
+        }
     }
 
 }

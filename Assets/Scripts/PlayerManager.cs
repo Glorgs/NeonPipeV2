@@ -17,6 +17,8 @@ public class PlayerManager : MonoBehaviour
 
     private Painting playerPainting;
 
+    private int damageCollision = 20;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -37,6 +39,8 @@ public class PlayerManager : MonoBehaviour
     void Damage()
     {
         numberHP--;
+        VariableGlobale.Si().CurrentHP -= damageCollision;
+
         if (damageSFX != null)
         {
             AudioManager.Si().Play(damageSFX, AudioManager.Si().gameObject);
@@ -44,10 +48,12 @@ public class PlayerManager : MonoBehaviour
         
         playerPainting.AddScore(-scoreLostOnCollision);
 
-        playerUI.UpdateLife(numberHP);
-        playerUI.UpdateScoreText(playerPainting.GetScore());
 
-        if (numberHP == 0)
+        playerUI.UpdateLifeBar();
+
+        //playerUI.UpdateScoreText(playerPainting.GetScore());
+
+        if (VariableGlobale.Si().CurrentHP <= 0)
         {
             UIManager.Si().ShowEndMenu();
         }
