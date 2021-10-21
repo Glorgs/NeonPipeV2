@@ -42,7 +42,7 @@ public class PlayerManager : MonoBehaviour
 
         if (damageSFX != null)
         {
-            AudioManager.Si().Play(damageSFX, AudioManager.Si().gameObject);
+            AudioManager.Si().PlaySFX(damageSFX, AudioManager.Si().gameObject);
         }
         
         playerPainting.AddScore(-scoreLostOnCollision);

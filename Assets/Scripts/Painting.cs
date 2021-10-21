@@ -57,7 +57,7 @@ public class Painting : MonoBehaviour
             if(spraySFX != null)
             {
                 Debug.Log("spray");
-                AudioManager.Si().Play(spraySFX, AudioManager.Si().gameObject);
+                AudioManager.Si().PlaySFX(spraySFX, AudioManager.Si().gameObject);
             }
             CheckIfInTag();
 
@@ -104,7 +104,7 @@ public class Painting : MonoBehaviour
 
                     if (scoringSFX != null)
                     {
-                        AudioManager.Si().Play(scoringSFX, AudioManager.Si().gameObject);
+                        AudioManager.Si().PlaySFX(scoringSFX, AudioManager.Si().gameObject);
                     }
 
                     break;
