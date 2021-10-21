@@ -56,6 +56,7 @@ public class InGamePlayerUI : MonoBehaviour
         {
             VariableGlobale.Si().Heal(amount);
             newBarValue = ((float)VariableGlobale.Si().CurrentHP / VariableGlobale.Si().MaxHP);
+            Debug.Log("New Value : " + newBarValue);
         }
 
     }
@@ -72,7 +73,7 @@ public class InGamePlayerUI : MonoBehaviour
         while (LifeBar.value != newBarValue)
         {
             Debug.Log("Min : " + Mathf.Sign(newBarValue - value));
-            LifeBar.value += Mathf.Min(speedBar, Mathf.Abs(newBarValue - LifeBar.value)) * Mathf.Sign(newBarValue - value);
+            LifeBar.value += Mathf.Min(speedBar, Mathf.Abs(newBarValue - LifeBar.value)) * Mathf.Sign(newBarValue - LifeBar.value);
             yield return null;
         }
 

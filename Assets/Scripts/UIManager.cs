@@ -32,8 +32,8 @@ public class UIManager : MySingleton<UIManager>
         VariableGlobale.Si().MaxAmountPlayer = 1;
         VariableGlobale.Si().CurrentHP = VariableGlobale.Si().MaxHP;
 
-        AudioManager.Si().Stop("Music");
-        AudioManager.Si().Play("MusicPlay", AudioManager.Si().gameObject);
+        AudioManager.Si().StopMusic("Music");
+        AudioManager.Si().PlayMusic("MusicPlay", AudioManager.Si().gameObject);
         SceneManager.LoadScene(1);
     }
 
@@ -43,8 +43,8 @@ public class UIManager : MySingleton<UIManager>
         VariableGlobale.Si().MaxAmountPlayer = 2;
         VariableGlobale.Si().CurrentHP = VariableGlobale.Si().MaxHP;
 
-        AudioManager.Si().Stop("Music");
-        AudioManager.Si().Play("MusicPlay", AudioManager.Si().gameObject);
+        AudioManager.Si().StopMusic("Music");
+        AudioManager.Si().PlayMusic("MusicPlay", AudioManager.Si().gameObject);
         SceneManager.LoadScene(1);
     }
 
@@ -82,8 +82,8 @@ public class UIManager : MySingleton<UIManager>
     }
 
     public void GoToMenu() {
-        AudioManager.Si().Stop("MusicPlay");
-        AudioManager.Si().Play("Music", AudioManager.Si().gameObject);
+        AudioManager.Si().StopMusic("MusicPlay");
+        AudioManager.Si().PlayMusic("Music", AudioManager.Si().gameObject);
         SceneManager.LoadScene(0);
         Time.timeScale = 1f;
     }

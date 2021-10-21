@@ -119,7 +119,7 @@ public class PlayerController : MonoBehaviour
 
     private void StopPaint() {
         isPainting = false;
-        AudioManager.Si().Stop(spraySFX);
+        AudioManager.Si().StopSFX(spraySFX);
     }
 
     private void CheckNumberPlayer()

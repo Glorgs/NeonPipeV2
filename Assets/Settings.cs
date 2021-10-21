@@ -32,4 +32,12 @@ public class Settings : MonoBehaviour
         gear1.DORotate(Vector3.zero, duration).SetEase(rotationEase);
         gear2.DORotate(Vector3.zero, duration).SetEase(rotationEase);
     }
+
+    void OnDisable()
+    {
+        if (this.enabled == true)
+        {
+            RotateOut();
+        }
+    }
 }
