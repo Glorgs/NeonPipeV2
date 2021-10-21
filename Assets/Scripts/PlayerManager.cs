@@ -39,7 +39,6 @@ public class PlayerManager : MonoBehaviour
     void Damage()
     {
         numberHP--;
-        VariableGlobale.Si().CurrentHP -= damageCollision;
 
         if (damageSFX != null)
         {
@@ -49,7 +48,7 @@ public class PlayerManager : MonoBehaviour
         playerPainting.AddScore(-scoreLostOnCollision);
 
 
-        playerUI.UpdateLifeBar();
+        playerUI.UpdateLifeBar(-damageCollision);
 
         //playerUI.UpdateScoreText(playerPainting.GetScore());
 
@@ -68,7 +67,8 @@ public class PlayerManager : MonoBehaviour
         float t = 0;
         int blink = 0;
 
-        playerBody.detectCollisions = false;
+        Physics.IgnoreLayerCollision(0, 0);
+        //playerBody.detectCollisions = false;
         playerRenderer.enabled = false;
 
         while (t < duration)
@@ -83,7 +83,8 @@ public class PlayerManager : MonoBehaviour
             yield return null;
         }
 
-        playerBody.detectCollisions = true;
+        Physics.IgnoreLayerCollision(0, 0, false);
+        //playerBody.detectCollisions = true;
         playerRenderer.enabled = true;
     }
 

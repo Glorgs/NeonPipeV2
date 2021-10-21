@@ -102,6 +102,11 @@ public class VariableGlobale : MySingleton<VariableGlobale>
         {
             currentHP = maxHP;
         }
+
+        if (currentHP < 0)
+        {
+            currentHP = 0;
+        }
     }
 
 }

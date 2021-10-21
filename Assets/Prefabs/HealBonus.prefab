@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2522176127353190333}
   - component: {fileID: 4035345813331039846}
   - component: {fileID: 4035345813331039849}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: spraypaint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -119,7 +119,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8866564240613370979}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: HealBonus
   m_TagString: Untagged
   m_Icon: {fileID: 0}

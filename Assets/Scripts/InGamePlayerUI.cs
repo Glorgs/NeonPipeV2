@@ -15,6 +15,9 @@ public class InGamePlayerUI : MonoBehaviour
 
     private int score = 0;
     private CanvasRenderer scoreRenderer;
+    private float newBarValue;
+    private bool isUpdatingBar = false;
+    public float speedBar = 0.001f;
 
     private void Start() {
         float screenWidth = Screen.width;
@@ -43,8 +46,37 @@ public class InGamePlayerUI : MonoBehaviour
         }
     }
 
-    public void UpdateLifeBar()
+    public void UpdateLifeBar(int amount)
     {
-        LifeBar.value = ((float)VariableGlobale.Si().CurrentHP / VariableGlobale.Si().MaxHP);
+        if (!isUpdatingBar)
+        {
+            StartCoroutine(UpdateBar(amount));
+        }
+        else
+        {
+            VariableGlobale.Si().Heal(amount);
+            newBarValue = ((float)VariableGlobale.Si().CurrentHP / VariableGlobale.Si().MaxHP);
+        }
+
+    }
+
+    IEnumerator UpdateBar(int amount)
+    {
+        isUpdatingBar = true;
+        float value = LifeBar.value;
+        Debug.Log(amount);
+
+        VariableGlobale.Si().Heal(amount);
+        newBarValue = ((float)VariableGlobale.Si().CurrentHP / VariableGlobale.Si().MaxHP);
+
+        while (LifeBar.value != newBarValue)
+        {
+            Debug.Log("Min : " + Mathf.Sign(newBarValue - value));
+            LifeBar.value += Mathf.Min(speedBar, Mathf.Abs(newBarValue - LifeBar.value)) * Mathf.Sign(newBarValue - value);
+            yield return null;
+        }
+
+        isUpdatingBar = false;
+
     }
 }
