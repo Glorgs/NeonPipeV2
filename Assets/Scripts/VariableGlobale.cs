@@ -23,6 +23,20 @@ public class VariableGlobale : MySingleton<VariableGlobale>
     public int maxHP = 100;
     private int currentHP;
 
+    private int globalScore = 0;
+
+    public int GlobalScore
+    {
+        get
+        {
+            return globalScore;
+        }
+        set
+        {
+            globalScore = value;
+        }
+    }
+
     public int MaxHP
     {
         get

@@ -19,8 +19,8 @@ public class Icon : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        transform.DOScale(scale * new Vector3(1, 1, 1), duration).SetLoops(-1, LoopType.Yoyo).SetEase(ease);
-        shadow.DOScale(scale * new Vector3(-1, 1, 1), duration).SetLoops(-1, LoopType.Yoyo).SetEase(ease);
+        transform.DOScale(scale * new Vector3(-1, 1, 1), duration).SetLoops(-1, LoopType.Yoyo).SetEase(ease);
+        shadow.DOScale(scale * new Vector3(1, 1, 1), duration).SetLoops(-1, LoopType.Yoyo).SetEase(ease);
 
         transform.DORotate(Vector3.forward * angle, rotationduration).From(transform.eulerAngles).SetLoops(-1, LoopType.Yoyo).SetEase(ease);
         shadow.DORotate(Vector3.forward * angle, rotationduration).From(transform.eulerAngles).SetLoops(-1, LoopType.Yoyo).SetEase(ease);

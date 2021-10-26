@@ -640,6 +640,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Renderer
       objectReference: {fileID: 0}
+    - target: {fileID: 408096551288592283, guid: 5e9b0848a5eb19e4b96c37ec03bf6929, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 408096551288592286, guid: 5e9b0848a5eb19e4b96c37ec03bf6929, type: 3}
       propertyPath: m_CullingMask.m_Bits
       value: 0
@@ -724,7 +728,7 @@ PrefabInstance:
     - target: {fileID: 393771522399567742, guid: c0af0080b0ae95c499d16c4e9f16fb5f, type: 3}
       propertyPath: playerUI
       value: 
-      objectReference: {fileID: 912329496}
+      objectReference: {fileID: 912329498}
     - target: {fileID: 393771522399567742, guid: c0af0080b0ae95c499d16c4e9f16fb5f, type: 3}
       propertyPath: spraySFX
       value: Spray2
@@ -748,7 +752,7 @@ PrefabInstance:
     - target: {fileID: 393771523177304018, guid: c0af0080b0ae95c499d16c4e9f16fb5f, type: 3}
       propertyPath: playerUI
       value: 
-      objectReference: {fileID: 912329497}
+      objectReference: {fileID: 912329498}
     - target: {fileID: 393771523177304018, guid: c0af0080b0ae95c499d16c4e9f16fb5f, type: 3}
       propertyPath: spraySFX
       value: Spray1
@@ -1348,6 +1352,10 @@ PrefabInstance:
       propertyPath: m_PlaneDistance
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 987501842453240658, guid: 89d570bb92dc82049be6265461475f99, type: 3}
+      propertyPath: cam
+      value: 
+      objectReference: {fileID: 299719317}
     - target: {fileID: 1545680531665307291, guid: 89d570bb92dc82049be6265461475f99, type: 3}
       propertyPath: m_Camera
       value: 
@@ -1546,28 +1554,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 89d570bb92dc82049be6265461475f99, type: 3}
---- !u!114 &912329496 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8975150126537957909, guid: 89d570bb92dc82049be6265461475f99, type: 3}
-  m_PrefabInstance: {fileID: 912329495}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7d438b84e78540544a54cd9361103098, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &912329497 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8975150127101945026, guid: 89d570bb92dc82049be6265461475f99, type: 3}
-  m_PrefabInstance: {fileID: 912329495}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7d438b84e78540544a54cd9361103098, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &912329498 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 750808623105966149, guid: 89d570bb92dc82049be6265461475f99, type: 3}

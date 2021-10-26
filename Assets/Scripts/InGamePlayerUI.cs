@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using DG.Tweening;
 
 public class InGamePlayerUI : MonoBehaviour
 {
@@ -19,6 +20,8 @@ public class InGamePlayerUI : MonoBehaviour
     private bool isUpdatingBar = false;
     public float speedBar = 0.001f;
 
+    private float timeNoScore = 1f;
+
     private void Start() {
         float screenWidth = Screen.width;
         float screenHeight = Screen.height;
@@ -29,6 +32,12 @@ public class InGamePlayerUI : MonoBehaviour
     public void UpdateScoreText(int currentScore) {
         score = currentScore;
         scoreText.SetText(currentScore.ToString());
+
+        if (timeNoScore > 0.4f)
+        {
+            WiggleScore();
+        }
+        timeNoScore = 0;
     }
 
     public int GetScore() {
@@ -79,5 +88,26 @@ public class InGamePlayerUI : MonoBehaviour
 
         isUpdatingBar = false;
 
+    }
+
+    void Update()
+    {
+        timeNoScore += Time.deltaTime;
+        if (timeNoScore > 0.4f)
+        {
+            StopWiggleScore();
+        }
+    }
+
+    public void WiggleScore()
+    {
+        Debug.Log("Wiggle");
+        scoreText.transform.DOScale(1.2f, 0.3f).SetLoops(-1, LoopType.Yoyo);
+    }
+
+    public void StopWiggleScore()
+    {
+        scoreText.transform.DOKill();
+        scoreText.transform.DOScale(1f, 0.3f);
     }
 }

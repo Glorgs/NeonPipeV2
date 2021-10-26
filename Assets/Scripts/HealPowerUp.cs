@@ -9,5 +9,6 @@ public class HealPowerUp : PowerUp
     public override void Use(GameObject player)
     {
         player.GetComponentInParent<PlayerManager>().playerUI.UpdateLifeBar(amountHeal);
+        ShowText.Si().ShowDamageNumber("HP UP", transform.position);
     }
 }

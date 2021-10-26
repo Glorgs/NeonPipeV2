@@ -15,6 +15,7 @@ public class UIManager : MySingleton<UIManager>
 
     [SerializeField] private InGamePlayerUI player1UI;
     [SerializeField] private InGamePlayerUI player2UI;
+
     private PlayerInputAction playerAction;
     private InputActionMap actionMap;
     private bool isPaused;
@@ -104,4 +105,5 @@ public class UIManager : MySingleton<UIManager>
     private void OnDisable() {
         playerAction.Disable();
     }
+
 }

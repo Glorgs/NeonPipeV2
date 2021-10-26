@@ -69,7 +69,8 @@ public class Painting : MonoBehaviour
 
     public void AddScore(int scoreModifier) {
         score += scoreModifier;
-        playerUI.UpdateScoreText(score);
+        VariableGlobale.Si().GlobalScore += scoreModifier;
+        playerUI.UpdateScoreText(VariableGlobale.Si().GlobalScore);
     }
 
     public int GetScore() {
@@ -96,12 +97,12 @@ public class Painting : MonoBehaviour
 
                 if (Mathf.Abs(up) < t.GetComponent<DecalProjector>().size.y/2f && Mathf.Abs(right) < t.GetComponent<DecalProjector>().size.x / 2f && forward > 0)
                 {
-                    score += 10;
-                    playerUI.UpdateScoreText(score);
+                    AddScore(10);
 
                     TagManager.Si().tags[GetComponent<PlayerController>().NumeroPlayer] = tag;
                     TagManager.Si().peintures[GetComponent<PlayerController>().NumeroPlayer] = peinture;
 
+                    ShowText.Si().ShowDamageNumber("Great", projectionPeinture);
                     if (scoringSFX != null)
                     {
                         AudioManager.Si().PlaySFX(scoringSFX, AudioManager.Si().gameObject);
