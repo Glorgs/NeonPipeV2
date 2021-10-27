@@ -35,7 +35,8 @@ public class ShowText : MySingleton<ShowText>
         damageNumberTransform.localScale = Vector3.one;
         damageNumberTransform.anchoredPosition = new Vector2(screenPosition.x * m_RectTransform.rect.width, screenPosition.y * m_RectTransform.rect.height);
 
-        newDamageNumberObject.transform.DOScale(1.2f, 0.3f);
+        newDamageNumberObject.transform.DOScale(1.3f, 0.3f);
+        newDamageNumberObject.transform.DOMove(newDamageNumberObject.transform.position + new Vector3(0, 1, 0)*200, 2f);
 
         newDamageNumberObject.GetComponent<Text>().DOColor(new Color(248f/255,95f/255,105f/255), 0.2f).SetLoops(-1, LoopType.Yoyo);
 

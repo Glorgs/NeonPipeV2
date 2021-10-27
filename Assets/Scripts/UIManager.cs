@@ -5,12 +5,14 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
 using TMPro;
+using DG.Tweening;
 
 public class UIManager : MySingleton<UIManager>
 {
     [SerializeField] private GameObject PauseMenu;
     [SerializeField] private GameObject EndMenu;
     [SerializeField] private GameObject InGameUI;
+    [SerializeField] private GameObject ComboText;
     [SerializeField] private TextMeshProUGUI winner;
 
     [SerializeField] private InGamePlayerUI player1UI;
@@ -104,6 +106,40 @@ public class UIManager : MySingleton<UIManager>
 
     private void OnDisable() {
         playerAction.Disable();
+    }
+
+    public void Combo()
+    {
+        StartCoroutine(StartCombo());
+    }
+
+    IEnumerator StartCombo()
+    {
+        Transform duo = ComboText.transform.GetChild(0);
+        Transform combo = ComboText.transform.GetChild(1);
+
+        duo.gameObject.SetActive(true);
+
+        duo.DOScale(1.0f, 0.3f).From(3.0f);
+        duo.DOMove(duo.position + new Vector3(-1, -1, 0) * 100, 0.3f);
+        
+        duo.GetComponent<Text>().DOColor(new Color(1f, 0f, 1f), 0.5f).SetLoops(-1, LoopType.Yoyo).SetEase(Ease.InOutQuad);
+        combo.GetComponent<Text>().DOColor(new Color(1f, 0f, 1f), 0.5f).SetLoops(-1, LoopType.Yoyo).SetEase(Ease.InOutQuad);
+
+        yield return new WaitForSeconds(0.1f);
+
+        combo.gameObject.SetActive(true);
+
+        combo.DOScale(1.0f, 0.3f).From(3.0f);
+        combo.DOMove(combo.position + new Vector3(-1, -1, 0) * 100, 0.3f);
+
+        yield return new WaitForSeconds(0.3f);
+
+        duo.DOScale(1.1f, 0.5f).SetLoops(-1, LoopType.Yoyo).SetEase(Ease.InOutQuad);
+        duo.DOMove(duo.position + new Vector3(0, 1, 0) * 30, 0.5f).SetLoops(-1, LoopType.Yoyo).SetEase(Ease.InOutQuad);
+        combo.DOScale(1.1f, 0.5f).SetLoops(-1, LoopType.Yoyo).SetEase(Ease.InOutQuad);
+        combo.DOMove(combo.position + new Vector3(0, -1, 0) * 30, 0.5f).SetLoops(-1, LoopType.Yoyo).SetEase(Ease.InOutQuad);
+        
     }
 
 }
