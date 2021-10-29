@@ -21,6 +21,8 @@ public class UIManager : MySingleton<UIManager>
     private PlayerInputAction playerAction;
     private InputActionMap actionMap;
     private bool isPaused;
+    private Vector3 duoBasePos;
+    private Vector3 comboBasePos;
 
     private void Awake() {
         playerAction = new PlayerInputAction();
@@ -110,11 +112,15 @@ public class UIManager : MySingleton<UIManager>
 
     public void Combo()
     {
+        duoBasePos = ComboText.transform.GetChild(0).position;
+        comboBasePos = ComboText.transform.GetChild(1).position;
+
         StartCoroutine(StartCombo());
     }
 
     IEnumerator StartCombo()
     {
+
         Transform duo = ComboText.transform.GetChild(0);
         Transform combo = ComboText.transform.GetChild(1);
 
@@ -123,8 +129,8 @@ public class UIManager : MySingleton<UIManager>
         duo.DOScale(1.0f, 0.3f).From(3.0f);
         duo.DOMove(duo.position + new Vector3(-1, -1, 0) * 100, 0.3f);
         
-        duo.GetComponent<Text>().DOColor(new Color(1f, 0f, 1f), 0.5f).SetLoops(-1, LoopType.Yoyo).SetEase(Ease.InOutQuad);
-        combo.GetComponent<Text>().DOColor(new Color(1f, 0f, 1f), 0.5f).SetLoops(-1, LoopType.Yoyo).SetEase(Ease.InOutQuad);
+        duo.GetComponent<Text>().DOColor(new Color(1f, 0f, 1f), 0.5f).From(new Color(0f,1f, 52f/255)).SetLoops(-1, LoopType.Yoyo).SetEase(Ease.InOutQuad);
+        combo.GetComponent<Text>().DOColor(new Color(1f, 0f, 1f), 0.5f).From(new Color(0f,1f, 52f/255)).SetLoops(-1, LoopType.Yoyo).SetEase(Ease.InOutQuad);
 
         yield return new WaitForSeconds(0.1f);
 
@@ -140,6 +146,26 @@ public class UIManager : MySingleton<UIManager>
         combo.DOScale(1.1f, 0.5f).SetLoops(-1, LoopType.Yoyo).SetEase(Ease.InOutQuad);
         combo.DOMove(combo.position + new Vector3(0, -1, 0) * 30, 0.5f).SetLoops(-1, LoopType.Yoyo).SetEase(Ease.InOutQuad);
         
+    }
+
+    public void StopCombo()
+    {
+        Debug.Log("StopCombo");
+
+        Transform duo = ComboText.transform.GetChild(0);
+        Transform combo = ComboText.transform.GetChild(1);
+
+        duo.DOKill();
+        combo.DOKill();
+
+        duo.GetComponent<Text>().DOKill();
+        combo.GetComponent<Text>().DOKill();
+
+        duo.transform.position = duoBasePos;
+        combo.transform.position = comboBasePos;
+
+        duo.gameObject.SetActive(false);
+        combo.gameObject.SetActive(false);
     }
 
 }

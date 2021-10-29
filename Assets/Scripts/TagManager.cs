@@ -10,6 +10,9 @@ public class TagManager : MySingleton<TagManager>
 
     public Material rainbowMaterial;
 
+    private bool inCombo = false;
+    private float timeNoCombo = 1f;
+
     void Start()
     {
         tags = new GameObject[2];
@@ -39,10 +42,29 @@ public class TagManager : MySingleton<TagManager>
             peintures[0].GetComponent<DecalProjector>().material = rainbowMaterial;
             peintures[1].GetComponent<DecalProjector>().material = rainbowMaterial;
             Debug.Log("Combo");
+
+            if (timeNoCombo > 0.4f)
+            {
+                inCombo = true;
+                UIManager.Si().Combo();
+            }
+
+            timeNoCombo = 0f;
+        }
+        else if(inCombo)
+        {
+            timeNoCombo += Time.deltaTime;
+        }
+
+        if (timeNoCombo > 0.4f && inCombo)
+        {
+            inCombo = false;
+            UIManager.Si().StopCombo();
         }
 
         tags[0] = null;
         tags[1] = null;
+
     }
 
     // Update is called once per frame

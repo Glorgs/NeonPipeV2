@@ -26,9 +26,6 @@ public class ShowText : MySingleton<ShowText>
 
         Vector3 screenPosition = cam.WorldToViewportPoint(worldPosition);
 
-        Debug.Log(screenPosition);
-        Debug.Log(Camera.main.WorldToViewportPoint(worldPosition));
-
         RectTransform damageNumberTransform = newDamageNumberObject.GetComponent<RectTransform>();
 
         damageNumberTransform.SetParent(transform, true);
