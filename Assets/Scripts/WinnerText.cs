@@ -8,6 +8,8 @@ public class WinnerText : MonoBehaviour
     [SerializeField] private TextMeshProUGUI winnerText;
     [SerializeField] private TextMeshProUGUI player1Score;
     [SerializeField] private TextMeshProUGUI player2Score;
+    [SerializeField] private TextMeshProUGUI timeText;
+
     public void Start() {
         winnerText = GetComponent<TextMeshProUGUI>();
     }
@@ -25,5 +27,10 @@ public class WinnerText : MonoBehaviour
 
         player1Score.SetText(p1Score.ToString());
         player2Score.SetText(p2Score.ToString());
+    }
+
+    public void SetTime(int time)
+    {
+        timeText.SetText("You Have Tagged during " + time.ToString() + " s !");
     }
 }

@@ -12,6 +12,19 @@ public class TagManager : MySingleton<TagManager>
 
     private bool inCombo = false;
     private float timeNoCombo = 1f;
+    private bool endAnim = false;
+
+    public bool EndAnim
+    {
+        get
+        {
+            return endAnim;
+        }
+        set
+        {
+            endAnim = value;
+        }
+    }
 
     void Start()
     {
@@ -43,13 +56,16 @@ public class TagManager : MySingleton<TagManager>
             peintures[1].GetComponent<DecalProjector>().material = rainbowMaterial;
             Debug.Log("Combo");
 
-            if (timeNoCombo > 0.4f)
+            if(endAnim == false)
             {
-                inCombo = true;
-                UIManager.Si().Combo();
+                if (timeNoCombo > 0.4f)
+                {
+                    inCombo = true;
+                    UIManager.Si().Combo();
+                }
+                timeNoCombo = 0f;
             }
-
-            timeNoCombo = 0f;
+          
         }
         else if(inCombo)
         {

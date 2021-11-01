@@ -18,6 +18,15 @@ public class PlayerManager : MonoBehaviour
     private Painting playerPainting;
 
     private int damageCollision = 20;
+    private int hitTimes = 0;
+
+    public int HitTimes
+    {
+        get
+        {
+            return hitTimes;
+        }
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -39,6 +48,7 @@ public class PlayerManager : MonoBehaviour
     void Damage()
     {
         numberHP--;
+        hitTimes++;
 
         if (damageSFX != null)
         {

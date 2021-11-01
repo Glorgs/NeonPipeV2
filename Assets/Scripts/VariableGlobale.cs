@@ -24,6 +24,19 @@ public class VariableGlobale : MySingleton<VariableGlobale>
     private int currentHP;
 
     private int globalScore = 0;
+    private float inGameTime = 0f;
+
+    public float InGameTime
+    {
+        get
+        {
+            return inGameTime;
+        }
+        set
+        {
+            inGameTime = value;
+        }
+    }
 
     public int GlobalScore
     {
@@ -89,12 +102,15 @@ public class VariableGlobale : MySingleton<VariableGlobale>
     {
         currentHP = maxHP;
         colorsPlayer = new Color[2];
+        colorsPlayer[0] = new Color(1.0f, 0f, 1.0f) * 15;
+        colorsPlayer[1] = new Color(0.0f, 1.0f, 0.0f) * 15;
         rainbowColor = Color.HSVToRGB(hue, sat, bri) * 30;
     }
 
     void Update()
     {
         Color.RGBToHSV(rainbowColor, out hue, out sat, out bri);
+        inGameTime += Time.deltaTime;
 
         hue += rainbowSpeed / 1000;
         if (hue >= 1)
