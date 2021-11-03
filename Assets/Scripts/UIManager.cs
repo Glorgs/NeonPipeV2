@@ -84,6 +84,7 @@ public class UIManager : MySingleton<UIManager>
         Time.timeScale = 1f;
         EndUIPlayer2.SetActive(false);
         EndUIPlayer1.SetActive(false);
+        VariableGlobale.Si().GlobalScore = 0;
 
         if (VariableGlobale.Si().MaxAmountPlayer == 1)
         {
@@ -98,6 +99,7 @@ public class UIManager : MySingleton<UIManager>
     public void GoToMenu() {
         EndUIPlayer2.SetActive(false);
         EndUIPlayer1.SetActive(false);
+        VariableGlobale.Si().GlobalScore = 0;
         AudioManager.Si().StopMusic("MusicPlay");
         AudioManager.Si().PlayMusic("Music", AudioManager.Si().gameObject);
         SceneManager.LoadScene(0);
@@ -108,7 +110,8 @@ public class UIManager : MySingleton<UIManager>
         InGameUI.SetActive(false);
         EndMenu.SetActive(true);
         Time.timeScale = 0f;
-        
+
+        StopAllCoroutines();
         WinnerText winnerText = EndMenu.GetComponentInChildren<WinnerText>();
 
         if(VariableGlobale.Si().MaxAmountPlayer == 2)

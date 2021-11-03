@@ -1675,7 +1675,7 @@ PrefabInstance:
       objectReference: {fileID: 6927033}
     - target: {fileID: 160042406446534626, guid: dfaeaad77b8f15f4caed31bfe9d09993, type: 3}
       propertyPath: unlockText
-      value: 'Unlock Condition : Tag for 100s'
+      value: Survive for 100s
       objectReference: {fileID: 0}
     - target: {fileID: 160042406446534626, guid: dfaeaad77b8f15f4caed31bfe9d09993, type: 3}
       propertyPath: rotationDuration
@@ -1737,6 +1737,10 @@ PrefabInstance:
       propertyPath: spray
       value: 
       objectReference: {fileID: 1019086968}
+    - target: {fileID: 1031434568920217028, guid: dfaeaad77b8f15f4caed31bfe9d09993, type: 3}
+      propertyPath: unlockText
+      value: Earn 2000 pts
+      objectReference: {fileID: 0}
     - target: {fileID: 1031434568920217028, guid: dfaeaad77b8f15f4caed31bfe9d09993, type: 3}
       propertyPath: rotationDuration
       value: 0.3
@@ -1845,6 +1849,10 @@ PrefabInstance:
       propertyPath: spray
       value: 
       objectReference: {fileID: 183667659}
+    - target: {fileID: 2701976451884275818, guid: dfaeaad77b8f15f4caed31bfe9d09993, type: 3}
+      propertyPath: unlockText
+      value: Earn 2000 pts
+      objectReference: {fileID: 0}
     - target: {fileID: 2701976451884275818, guid: dfaeaad77b8f15f4caed31bfe9d09993, type: 3}
       propertyPath: rotationDuration
       value: 0.3
@@ -2227,7 +2235,7 @@ PrefabInstance:
       objectReference: {fileID: 583447874}
     - target: {fileID: 9154211598715047678, guid: dfaeaad77b8f15f4caed31bfe9d09993, type: 3}
       propertyPath: unlockText
-      value: 'Unlock Condition : Tag for 100s'
+      value: Survive for 100s
       objectReference: {fileID: 0}
     - target: {fileID: 9154211598715047678, guid: dfaeaad77b8f15f4caed31bfe9d09993, type: 3}
       propertyPath: rotationDuration

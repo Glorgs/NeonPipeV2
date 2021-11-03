@@ -19,6 +19,10 @@ public class PlayerManager : MonoBehaviour
 
     private int damageCollision = 20;
     private int hitTimes = 0;
+    private bool isInvulnerable = false;
+
+    private float tInvul;
+    private float durationInvul;
 
     public int HitTimes
     {
@@ -73,16 +77,17 @@ public class PlayerManager : MonoBehaviour
         }
     }
 
-    private IEnumerator Invulnerability(float duration = 1.0f)
+    private IEnumerator Invulnerability()
     {
-        float t = 0;
+        tInvul = 0;
         int blink = 0;
 
+        isInvulnerable = true;
         Physics.IgnoreLayerCollision(0, 0);
         //playerBody.detectCollisions = false;
         playerRenderer.enabled = false;
 
-        while (t < duration)
+        while (tInvul < durationInvul)
         {
             blink++;
             if(blink > blinkFrame)
@@ -90,10 +95,11 @@ public class PlayerManager : MonoBehaviour
                 blink = 0;
                 playerRenderer.enabled = !playerRenderer.enabled;
             }
-            t += Time.deltaTime;
+            tInvul += Time.deltaTime;
             yield return null;
         }
 
+        isInvulnerable = false;
         Physics.IgnoreLayerCollision(0, 0, false);
         //playerBody.detectCollisions = true;
         playerRenderer.enabled = true;
@@ -101,7 +107,18 @@ public class PlayerManager : MonoBehaviour
 
     public void StartInvulnerability(float time)
     {
-        StartCoroutine(Invulnerability(time));
+        if(!isInvulnerable)
+        {
+            durationInvul = time;
+            StartCoroutine(Invulnerability());
+
+        }
+        else
+        {
+            durationInvul = time;
+            tInvul = 0;
+        }
+
     }
 
 

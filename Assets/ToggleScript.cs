@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
+using TMPro;
 
 public class ToggleScript : MonoBehaviour
 {
@@ -111,8 +112,8 @@ public class ToggleScript : MonoBehaviour
     {
         if(!m_Toggle.interactable && !unlocked)
         {
-            myPanel = Instantiate(unlockTextPrefab, transform.position + new Vector3(10, 40, 0), Quaternion.identity);
-            myPanel.GetComponentInChildren<Text>().text = unlockText;
+            myPanel = Instantiate(unlockTextPrefab, transform.position + new Vector3(-80, 70, 0), Quaternion.identity);
+            myPanel.GetComponentInChildren<TextMeshProUGUI>().text = unlockText;
             myPanel.transform.SetParent(transform);
         }
     }
