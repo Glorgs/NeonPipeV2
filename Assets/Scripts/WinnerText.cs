@@ -31,6 +31,6 @@ public class WinnerText : MonoBehaviour
 
     public void SetTime(int time)
     {
-        timeText.SetText("You Have Tagged during " + time.ToString() + " s !");
+        timeText.SetText("You survived for <b>" + time.ToString() + "</b> s !");
     }
 }

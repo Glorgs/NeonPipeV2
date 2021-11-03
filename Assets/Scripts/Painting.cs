@@ -15,6 +15,10 @@ public class Painting : MonoBehaviour
 
     [SerializeField] private float timeBetweenSpawnDecrease = 0.001f;
     [SerializeField] private float timeBetweenSpawnMin = 0.0001f;
+    private float timeNoFeedback = 0f;
+    private string[] feedbackWord = new string[3] { "GREAT", "WOW", "AWESOME" };
+    private Color[] firstColor = new Color[3] { new Color(6f / 255, 1.0f, 0.0f), new Color(0f / 255, 52f / 255, 1.0f), new Color(255f / 255, 0.0f, 115f / 255) };
+    private Color[] secondColor = new Color[3] { new Color(0f / 255, 255 / 255f, 231f / 255), new Color(190f / 255, 0.0f, 1.0f), new Color(255f / 255, 24f / 255, 0.0f) };
 
     private int score = 0;
 
@@ -43,6 +47,8 @@ public class Painting : MonoBehaviour
     void Update()
     {
         t += Time.deltaTime;
+        timeNoFeedback += Time.deltaTime;
+
         if(t > timeBetweenSpawn && playerController.isPainting)
         {
             peinture = Instantiate(decalPrefab, decalSpawnTransform.position, Quaternion.AngleAxis(90,Vector3.right));
@@ -101,8 +107,9 @@ public class Painting : MonoBehaviour
 
                     TagManager.Si().tags[GetComponent<PlayerController>().NumeroPlayer] = tag;
                     TagManager.Si().peintures[GetComponent<PlayerController>().NumeroPlayer] = peinture;
+                    Feedback(projectionPeinture);
 
-                    ShowText.Si().ShowDamageNumber("Great", projectionPeinture);
+
                     if (scoringSFX != null)
                     {
                         AudioManager.Si().PlaySFX(scoringSFX, AudioManager.Si().gameObject);
@@ -113,6 +120,18 @@ public class Painting : MonoBehaviour
 
             }
         }
+    }
+
+    private void Feedback(Vector3 pos)
+    {
+        if(timeNoFeedback > 0.7f)
+        {
+            int i = Random.Range(0, feedbackWord.Length);
+            ShowText.Si().ShowDamageNumberColor(feedbackWord[i], pos, firstColor[i]);
+            timeNoFeedback = 0f;
+        }
+
+
     }
 
 }

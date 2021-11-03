@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
+using TMPro;
 
 public class ShowText : MySingleton<ShowText>
 {
@@ -19,10 +20,10 @@ public class ShowText : MySingleton<ShowText>
     }
 
 
-    public void ShowDamageNumber(string s, Vector3 worldPosition)
+    public void ShowDamageNumber(string s, Vector3 worldPosition, Color first, Color second)
     {
         GameObject newDamageNumberObject = Instantiate<GameObject>(DamageNumberPrefab);
-        newDamageNumberObject.GetComponent<Text>().text = s; 
+        newDamageNumberObject.GetComponent<TextMeshProUGUI>().text = s; 
 
         Vector3 screenPosition = cam.WorldToViewportPoint(worldPosition);
 
@@ -35,7 +36,27 @@ public class ShowText : MySingleton<ShowText>
         newDamageNumberObject.transform.DOScale(1.3f, 0.3f);
         newDamageNumberObject.transform.DOMove(newDamageNumberObject.transform.position + new Vector3(0, 1, 0)*(canvas.GetComponent<RectTransform>().rect.height/10f), 2f);
 
-        newDamageNumberObject.GetComponent<Text>().DOColor(new Color(248f/255,95f/255,105f/255), 0.2f).SetLoops(-1, LoopType.Yoyo);
+        newDamageNumberObject.GetComponent<TextMeshProUGUI>().DOColor(second, 0.2f).From(first).SetLoops(-1, LoopType.Yoyo);
+
+        StartCoroutine(DestroyShowedText(newDamageNumberObject));
+    }
+
+    public void ShowDamageNumberColor(string s, Vector3 worldPosition, Color first)
+    {
+        GameObject newDamageNumberObject = Instantiate<GameObject>(DamageNumberPrefab);
+        newDamageNumberObject.GetComponent<TextMeshProUGUI>().text = s;
+        newDamageNumberObject.GetComponent<TextMeshProUGUI>().color = first;
+
+        Vector3 screenPosition = cam.WorldToViewportPoint(worldPosition);
+
+        RectTransform damageNumberTransform = newDamageNumberObject.GetComponent<RectTransform>();
+
+        damageNumberTransform.SetParent(transform, true);
+        damageNumberTransform.localScale = Vector3.one;
+        damageNumberTransform.anchoredPosition = new Vector2(screenPosition.x * m_RectTransform.rect.width, screenPosition.y * m_RectTransform.rect.height);
+
+        newDamageNumberObject.transform.DOScale(1.3f, 0.3f);
+        newDamageNumberObject.transform.DOMove(newDamageNumberObject.transform.position + new Vector3(0, 1, 0) * (canvas.GetComponent<RectTransform>().rect.height / 10f), 2f);
 
         StartCoroutine(DestroyShowedText(newDamageNumberObject));
     }
@@ -49,7 +70,7 @@ public class ShowText : MySingleton<ShowText>
         yield return new WaitForSeconds(0.2f);
 
         obj.transform.DOKill();
-        obj.GetComponent<Text>().DOKill();
+        obj.GetComponent<TextMeshProUGUI>().DOKill();
 
         Destroy(obj);
     }

@@ -101,7 +101,7 @@ public class ToggleScript : MonoBehaviour
 
     private void OnEnable()
     {
-        if(!unlocked)
+        if(!unlocked && unlockable)
         {
             CheckUnlockable();
         }

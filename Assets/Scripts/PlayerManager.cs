@@ -49,6 +49,7 @@ public class PlayerManager : MonoBehaviour
     {
         numberHP--;
         hitTimes++;
+        ScreenShake.Si().Shake();
 
         if (damageSFX != null)
         {

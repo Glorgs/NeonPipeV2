@@ -179,8 +179,8 @@ public class UIManager : MySingleton<UIManager>
         duo.DOScale(1.0f, 0.3f).From(3.0f);
         duo.DOMove(duo.position + new Vector3(0, -1, 0) * (Canvas.GetComponent<RectTransform>().rect.height / 20f), 0.3f);
         
-        duo.GetComponent<Text>().DOColor(new Color(1f, 0f, 1f), 0.5f).From(new Color(0f,1f, 52f/255)).SetLoops(-1, LoopType.Yoyo).SetEase(Ease.InOutQuad);
-        combo.GetComponent<Text>().DOColor(new Color(1f, 0f, 1f), 0.5f).From(new Color(0f,1f, 52f/255)).SetLoops(-1, LoopType.Yoyo).SetEase(Ease.InOutQuad);
+        duo.GetComponent<TextMeshProUGUI>().DOColor(new Color(1f, 0f, 1f), 0.5f).From(new Color(0f,1f, 52f/255)).SetLoops(-1, LoopType.Yoyo).SetEase(Ease.InOutQuad);
+        combo.GetComponent<TextMeshProUGUI>().DOColor(new Color(1f, 0f, 1f), 0.5f).From(new Color(0f,1f, 52f/255)).SetLoops(-1, LoopType.Yoyo).SetEase(Ease.InOutQuad);
 
         yield return new WaitForSeconds(0.1f);
 
@@ -192,9 +192,9 @@ public class UIManager : MySingleton<UIManager>
         yield return new WaitForSeconds(0.3f);
 
         duo.DOScale(1.1f, 0.5f).SetLoops(-1, LoopType.Yoyo).SetEase(Ease.InOutQuad);
-        duo.DOMove(duo.position + new Vector3(0, 1, 0) * (Canvas.GetComponent<RectTransform>().rect.height / 60f), 0.5f).SetLoops(-1, LoopType.Yoyo).SetEase(Ease.InOutQuad);
+        duo.DOMove(duo.position + new Vector3(0, 1, 0) * (Canvas.GetComponent<RectTransform>().rect.height / 50f), 0.5f).SetLoops(-1, LoopType.Yoyo).SetEase(Ease.InOutQuad);
         combo.DOScale(1.1f, 0.5f).SetLoops(-1, LoopType.Yoyo).SetEase(Ease.InOutQuad);
-        combo.DOMove(combo.position + new Vector3(0, -1, 0) * (Canvas.GetComponent<RectTransform>().rect.height / 60f), 0.5f).SetLoops(-1, LoopType.Yoyo).SetEase(Ease.InOutQuad);
+        combo.DOMove(combo.position + new Vector3(0, -1, 0) * (Canvas.GetComponent<RectTransform>().rect.height / 50f), 0.5f).SetLoops(-1, LoopType.Yoyo).SetEase(Ease.InOutQuad);
         
     }
 
@@ -224,8 +224,8 @@ public class UIManager : MySingleton<UIManager>
         duo.DOKill();
         combo.DOKill();
 
-        duo.GetComponent<Text>().DOKill();
-        combo.GetComponent<Text>().DOKill();
+        duo.GetComponent<TextMeshProUGUI>().DOKill();
+        combo.GetComponent<TextMeshProUGUI>().DOKill();
 
         duo.transform.position = duoBasePos;
         combo.transform.position = comboBasePos;
